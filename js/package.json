@@ -1,4 +1,24 @@
 {
   "name": "jsigen",
-  "packageManager": "yarn@4.2.2"
+  "version": "0.1.0",
+  "description": "JSIGen - Connect your JavaScript and Dart Code with ease!",
+  "scripts": {
+    "test": "dart test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikeokoronkwo/jsigen.git"
+  },
+  "keywords": [
+    "jsigen",
+    "dart",
+    "javascript",
+    "dartjs"
+  ],
+  "author": "Nike Okoronkwo",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/nikeokoronkwo/jsigen/issues"
+  },
+  "homepage": "https://github.com/nikeokoronkwo/jsigen#readme"
 }
