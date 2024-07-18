@@ -1,0 +1,22 @@
+name: jsigen
+description: Generate JavaScript Objects and Bindings in Dart.
+version: 0.0.1-placeholder
+repository: https://github.com/nikeokoronkwo/dart_catalog
+
+environment:
+  sdk: ^3.3.0
+
+executables:
+  jsigen:
+
+# Add regular dependencies here.
+dependencies:
+  args: ^2.5.0
+  logging: ^1.2.0
+  # path: ^1.8.0
+
+dev_dependencies:
+  cli_pkg: ^2.10.0
+  grinder: ^0.9.5
+  lints: ^3.0.0
+  test: ^1.24.0
