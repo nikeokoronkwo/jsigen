@@ -13,6 +13,8 @@ executables:
 dependencies:
   args: ^2.5.0
   logging: ^1.2.0
+  node_interop: ^2.1.0
+  path: ^1.9.0
   # path: ^1.8.0
 
 dev_dependencies:
