@@ -3,7 +3,8 @@ import 'dart:io';
 
 import 'package:cli_pkg/cli_pkg.dart' as pkg;
 import 'package:grinder/grinder.dart';
-import 'package:path/path.dart' as p;
+
+import 'grind/js.dart';
 
 main(args) {
   pkg.humanName.value = "JSIgen";
@@ -11,40 +12,20 @@ main(args) {
   pkg.npmPackageJson.fn = () => json.decode(File("js/package.json").readAsStringSync())
           as Map<String, dynamic>;
   pkg.jsForceStrictMode.value = true;
+  pkg.jsEsmExports.value = {
+    'sayHello'
+  };
+  pkg.jsModuleMainLibrary.value = "lib/src/js.dart";
 
   pkg.addStandaloneTasks();
   pkg.addNpmTasks();
   return grind(args);
 }
 
-final buildDir = Directory("build/npm");
-
 @Task('Test the JS package')
 @Depends("pkg-js-dev")
 void js_test() {
   print("JS package test");
-}
-
-@Task('Copy the JS package files')
-void copyJs() {
-  print("Copying JS package files");
-  final dir = Directory("js");
-  
-  for (final file in dir.listSync()) {
-    if (p.basenameWithoutExtension(file.path) != "package") {
-      if (file is Directory) {
-        copyDirectory(file, Directory(p.join(buildDir.path, p.basename(file.path))));
-      } else {
-        copyFile(file as File, buildDir);
-      }
-    }
-    
-  }
-}
-
-@Task('Run the JS package manager and install dependencies')
-void runYarn() {
-  run('yarn', workingDirectory: buildDir.path);
 }
 
 @Task('Build the dev package')
@@ -56,5 +37,10 @@ void dev() {
 @Task('Build the release package')
 @Depends("pkg-npm-release")
 void release() {
+  
+}
 
+@Task('Update the version ')
+void version() {
+  run('dart', arguments: ['scripts/version.dart']);
 }
