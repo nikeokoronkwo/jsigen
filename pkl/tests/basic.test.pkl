@@ -1,0 +1,3 @@
+amends "../jsigen.pkl"
+
+name = "fooo"

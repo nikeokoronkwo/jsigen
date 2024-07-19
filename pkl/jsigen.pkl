@@ -1,0 +1,8 @@
+// 
+
+module JSIGen
+
+name: String
+
+description: String = ""
+
