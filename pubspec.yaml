@@ -15,6 +15,8 @@ dependencies:
   logging: ^1.2.0
   node_interop: ^2.1.0
   path: ^1.9.0
+  yaml: ^3.1.2
+  yaml_edit: ^2.2.1
   # path: ^1.8.0
 
 dev_dependencies:

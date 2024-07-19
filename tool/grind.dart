@@ -15,6 +15,7 @@ main(args) {
   pkg.jsEsmExports.value = {
     'sayHello'
   };
+  pkg.npmReadme.value = File("js/README.md").readAsStringSync();
   pkg.jsModuleMainLibrary.value = "lib/src/js.dart";
 
   pkg.addStandaloneTasks();

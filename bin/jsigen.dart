@@ -1,5 +1,7 @@
 import 'package:args/args.dart';
 
+import 'package:jsigen/src/cli.dart';
+
 final parser = ArgParser(allowTrailingOptions: true)
   ..addFlag('help', abbr: 'h', help: 'Show this help message and exit.')
   ..addFlag('version', abbr: 'v', help: 'Show version information and exit.')
@@ -15,7 +17,12 @@ void main(List<String> args) {
   }
 
   if (result.wasParsed('version')) {
-    print('0.0.1');
+    print(version);
     return;
+  }
+
+  if (result.rest.isNotEmpty) {
+    final files = result.rest;
+    print(files);
   }
 }

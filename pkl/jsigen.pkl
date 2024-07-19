@@ -1,4 +1,4 @@
-// 
+// 2024 (C) The JSIGen Authors
 
 module JSIGen
 

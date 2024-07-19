@@ -11,7 +11,7 @@ void copyJs() {
   final dir = Directory("js");
   
   for (final file in dir.listSync()) {
-    if (p.basenameWithoutExtension(file.path) != "package") {
+    if (["package.json", ".pnp.cjs", ".pnp.loader.mjs"].contains(p.basename(file.path)) && [".yarn"].contains(p.dirname(file.path))) {
       if (file is Directory) {
         copyDirectory(file, Directory(p.join(npmDir.path, p.basename(file.path))));
       } else {
