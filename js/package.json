@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "JSIGen - Connect your JavaScript and Dart Code with ease!",
   "scripts": {
-    "test": "dart test"
+    "test": "dart test",
+    "dev": "node ./jsigen.js"
   },
   "repository": {
     "type": "git",
