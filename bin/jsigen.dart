@@ -18,6 +18,4 @@ void main(List<String> args) {
     print('0.0.1');
     return;
   }
-
-  print(result.rest);
 }

@@ -10,6 +10,7 @@ main(args) {
   pkg.executables.value = {"jsigen": "bin/jsigen.dart"};
   pkg.npmPackageJson.fn = () => json.decode(File("js/package.json").readAsStringSync())
           as Map<String, dynamic>;
+  pkg.jsForceStrictMode.value = true;
 
   pkg.addStandaloneTasks();
   pkg.addNpmTasks();
@@ -49,7 +50,7 @@ void runYarn() {
 @Task('Build the dev package')
 @Depends("pkg-npm-dev", copyJs, runYarn)
 void dev() {
-  
+  run('yarn', arguments: ['dev'], workingDirectory: buildDir.path);
 }
 
 @Task('Build the release package')
