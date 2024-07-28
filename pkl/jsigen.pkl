@@ -2,7 +2,13 @@
 
 module JSIGen
 
+class JSIGenESMOptions {
+    dynamicImport: Boolean = false
+    require: Boolean = true
+}
+
 name: String
 
 description: String = ""
 
+esm: JSIGenESMOptions
