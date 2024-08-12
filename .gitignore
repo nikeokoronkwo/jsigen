@@ -8,6 +8,8 @@ pubspec.lock
 
 **/node_modules/
 
+**/.DS_Store
+
 .packages
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
