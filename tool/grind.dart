@@ -6,6 +6,8 @@ import 'package:grinder/grinder.dart';
 
 import 'grind/js.dart';
 
+export 'grind/js.dart';
+
 main(args) {
   pkg.humanName.value = "JSIgen";
   pkg.executables.value = {"jsigen": "bin/jsigen.dart"};
