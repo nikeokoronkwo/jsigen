@@ -11,3 +11,9 @@ The `jsigen` tool works by converting the public APIs in your JavaScript Code to
 - Type Checking
 - Code Generation
 - Compilation
+
+## Working with this Documentation
+If you are a user of this tool, you can get started with the [Getting Started Guide](./guide.md).
+
+If you plan on integrating this tool with other tools, you can also look at the [API Guide](./api.md) after the getting started guide. Note that this project is built as a JS Package.
+
