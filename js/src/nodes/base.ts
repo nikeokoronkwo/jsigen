@@ -1,7 +1,4 @@
-export interface BaseNode {
-    kind: NodeType;
-    exportKind: ExportKind
-}
+export interface BaseNode {}
 
 export type Type = string | PrimitiveType | InterfaceType
 
@@ -12,11 +9,3 @@ type PrimitiveType = "string" | "number" | "boolean"
 interface InterfaceType<T = any> {
     [k: string] : T
 }
-
-type NodeType = "string" |
-"number" |
-"boolean" |
-"bigint" |
-"symbol" |
-"null" |
-"undefined" | "function" | "object"

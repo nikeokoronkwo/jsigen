@@ -6,8 +6,8 @@ import fs from "node:fs";
 import parser from '@babel/parser';
 /// <reference types="@types/babel__traverse" />
 import traverse from '@babel/traverse';
-import { Declaration } from "@babel/types";
-import { FunctionNode } from "./nodes";
+import { Declaration, Identifier, TSTypeAnnotation } from "@babel/types";
+import { FunctionNode, ParameterNode } from "./nodes";
 
 interface ParseOptions {
   /** Whether typescript is allowed */
@@ -46,11 +46,29 @@ function handleDeclaration(declaration: Declaration, exportType: string) {
         declaration.typeParameters,
         declaration.predicate,
         declaration.declare,
-        declaration.id?.name
+        declaration.id?.name,
+        declaration.id
       );
       exp.push(
         {
-
+          name: declaration.id?.name,
+          parameters: declaration.params.map(p => {
+            switch (p.type) {
+              case "Identifier":
+                return {
+                  name: p.name,
+                  type: (p.typeAnnotation as TSTypeAnnotation).typeAnnotation,
+                  optional: p.optional,
+                } as ParameterNode
+              case "AssignmentPattern":
+                const param = p.left
+                const def = p.right
+              case "ArrayPattern":
+              case "ObjectPattern":
+              case "RestElement":
+            }
+            return {} as ParameterNode
+          })
         } as FunctionNode
       );
     case "VariableDeclaration":
