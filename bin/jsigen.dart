@@ -21,8 +21,11 @@ void main(List<String> args) {
     return;
   }
 
-  if (result.rest.isNotEmpty) {
-    final files = result.rest;
-    print(files);
-  }
+  // parse config file
+
+  // run jsigen
+
+  // parse file
+  
+  
 }
