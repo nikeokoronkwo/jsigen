@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:cli_pkg/cli_pkg.dart' as pkg;
 import 'package:grinder/grinder.dart';
+import 'package:path/path.dart';
 
 import 'grind/js.dart';
+import 'grind/utils.dart';
 
 export 'grind/js.dart';
 
@@ -17,6 +19,9 @@ main(args) {
   pkg.jsEsmExports.value = {
     'sayHello'
   };
+  pkg.jsRequires.value = [
+    pkg.JSRequire('./src/parse.js', target: pkg.JSRequireTarget.all, identifier: 'parser')
+  ];
   pkg.npmReadme.value = File("js/README.md").readAsStringSync();
   pkg.jsModuleMainLibrary.value = "lib/src/js.dart";
 
@@ -32,9 +37,9 @@ void js_test() {
 }
 
 @Task('Build the dev package')
-@Depends("pkg-npm-dev", copyJs, runYarn)
+@Depends("pkg-npm-dev", copyJs, runpnpm)
 void dev() {
-  run('yarn', arguments: ['dev'], workingDirectory: buildDir.path);
+  run('pnpm', arguments: ['dev'], workingDirectory: npmDir.path);
 }
 
 @Task('Build the release package')
