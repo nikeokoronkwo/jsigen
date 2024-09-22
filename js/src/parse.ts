@@ -37,40 +37,29 @@ function handleDeclaration(declaration: Declaration, exportType: string) {
 
   let exp = [];
 
+  console.log(declaration);
+
   switch (declaration.type) {
     case "FunctionDeclaration":
-      console.log(`Function Detected!\n`,
-        declaration.async,
-        declaration.returnType,
-        declaration.params,
-        declaration.typeParameters,
-        declaration.predicate,
-        declaration.declare,
-        declaration.id?.name,
-        declaration.id
-      );
-      exp.push(
-        {
-          name: declaration.id?.name,
-          parameters: declaration.params.map(p => {
-            switch (p.type) {
-              case "Identifier":
-                return {
-                  name: p.name,
-                  type: (p.typeAnnotation as TSTypeAnnotation).typeAnnotation,
-                  optional: p.optional,
-                } as ParameterNode
-              case "AssignmentPattern":
-                const param = p.left
-                const def = p.right
-              case "ArrayPattern":
-              case "ObjectPattern":
-              case "RestElement":
-            }
-            return {} as ParameterNode
-          })
-        } as FunctionNode
-      );
+      exp.push({
+        type: "function",
+        name: declaration.id?.name ?? declaration.id?.loc?.identifierName,
+        parameters: declaration.params.map((p) => {
+          // debug
+          console.log(`========PARAMETER=======\n`)
+          console.log(p)
+          console.log(`\n=====================`)
+          // debug end
+          
+          switch (p.type) {
+            case "Identifier":
+            case "AssignmentPattern":
+            case "ArrayPattern":
+            case "ObjectPattern":
+            case "RestElement":
+          }
+        })
+      });
     case "VariableDeclaration":
     case "ClassDeclaration":
     case "ExportAllDeclaration":
