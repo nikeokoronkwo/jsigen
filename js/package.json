@@ -21,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/nikeokoronkwo/jsigen/issues"
   },
-  "type": "module",
   "homepage": "https://github.com/nikeokoronkwo/jsigen#readme",
   "dependencies": {
     "@babel/parser": "^7.24.8",
