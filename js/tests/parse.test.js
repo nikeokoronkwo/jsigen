@@ -15,7 +15,7 @@ test('produces ', () => {
     return a + b;
   }
 
-  export async function subtract(a: number, b: number): Promise<number> {
+  export async function subtract({a, b} : {a: number, b: number}): Promise<number> {
     return a + b;
   }
 
@@ -25,8 +25,8 @@ test('produces ', () => {
     }
   }
 
-  export function myFunc<T>(a: T): Promise<T> {
-  
+  export function myFunc<T>([a, b]: [T, T]): Promise<T> {
+    
   }
   `
 

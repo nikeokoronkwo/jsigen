@@ -50,7 +50,7 @@ function handleDeclaration(declaration: Declaration, exportType: string) {
           console.log(p)
           console.log(`\n=====================`)
           // debug end
-          
+
           switch (p.type) {
             case "Identifier":
             case "AssignmentPattern":
@@ -60,7 +60,14 @@ function handleDeclaration(declaration: Declaration, exportType: string) {
           }
         })
       });
+      break;
     case "VariableDeclaration":
+      exp.push({
+        // TODO: Remove the 'd' when done
+        d: declaration.declarations.map(d => {
+          console.log(d)
+        })
+      })
     case "ClassDeclaration":
     case "ExportAllDeclaration":
     case "ExportDefaultDeclaration":
