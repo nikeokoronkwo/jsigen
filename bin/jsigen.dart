@@ -1,6 +1,13 @@
+import 'dart:convert';
+
+// TODO: Add support for deno apis
+import 'package:node_io/node_io.dart';
+
 import 'package:args/args.dart';
 
 import 'package:jsigen/src/cli.dart';
+import 'package:path/path.dart' as p;
+import 'package:yaml/yaml.dart';
 
 final parser = ArgParser(allowTrailingOptions: true)
   ..addFlag('help', abbr: 'h', help: 'Show this help message and exit.')
@@ -8,7 +15,7 @@ final parser = ArgParser(allowTrailingOptions: true)
   ..addOption('output', abbr: 'o', help: 'Output file path.')
   ..addOption('config', abbr: 'c', help: 'Config file path.');
 
-void main(List<String> args) {
+void main(List<String> args) async {
   final result = parser.parse(args);
 
   if (result.wasParsed('help')) {
@@ -21,11 +28,56 @@ void main(List<String> args) {
     return;
   }
 
+  String? arg = result.rest.isNotEmpty ? result.rest[0] : null;
+
   // parse config file
+  Directory cwd = Directory(arg ?? '.');
+
+  File configFile = File(p.join(cwd.absolute.path, result['config'] ?? 'jsigen.yaml'));
+  String configAsString;
+  if (await configFile.exists()) {
+    configAsString = await configFile.readAsString();
+  } else {
+    String pubspec = await File(p.join(cwd.absolute.path, 'pubspec.yaml')).readAsString();
+    final pub = loadYaml(pubspec)['jsigen'].toString();
+
+    if (pub == 'null' || pub == '') {
+      throw Exception('No config file/definition found');
+    } else {
+      configAsString = pub;
+    }
+  }
+
+  Map<String, dynamic> config = loadYaml(configAsString);
 
   // run jsigen
+  await runJsigen(config, cwd);
 
   // parse file
   
-  
+}
+
+// TODO: Implement function
+runJsigen(Map<String, dynamic> config, Directory cwd) async {
+  // get input file
+
+  // parse input file
+  await parseJsFile();
+
+  // convert to output file
+  await transformJsExports();
+
+  // write output file
+  await writeOutput();
+}
+
+runReverseJsigen(Map<String, dynamic> config, Directory cwd) async {
+  // parse input file
+  await parseDartFile();
+
+  // convert to output file
+  await transformDartExports();
+
+  // write output file
+  await writeOutput();
 }

@@ -11,4 +11,6 @@ name: String
 
 description: String = ""
 
+output: String = ""
+
 esm: JSIGenESMOptions

@@ -1,11 +1,13 @@
 library jsigen.api;
 
+import 'package:jsigen/src/api/config.dart';
+
 /// Parses a js file and generates the JS API AST from it needed for the given project
 /// 
 /// If a declaration has an object type, this object type is added in a [Set] and is generated as an anonymous object 
 /// 
 /// If a declaration has a function type, this object type is added in a [Set] and used as either a class or typealias
-parse() {
+parse(String file, JsigenConfig config) {
 
 }
 
@@ -30,6 +32,6 @@ parse() {
 /// ## Classes
 /// Classes are converted into classes in old interop and extension types in new interop
 /// 
-generate() {
+generate(String file, JsigenConfig config) {
   
 }
