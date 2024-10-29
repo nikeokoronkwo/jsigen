@@ -7,7 +7,7 @@ import 'package:jsigen/src/api/config.dart';
 /// If a declaration has an object type, this object type is added in a [Set] and is generated as an anonymous object 
 /// 
 /// If a declaration has a function type, this object type is added in a [Set] and used as either a class or typealias
-parse(String file, JsigenConfig config) {
+parse(String file, Config config) {
 
 }
 
@@ -32,6 +32,6 @@ parse(String file, JsigenConfig config) {
 /// ## Classes
 /// Classes are converted into classes in old interop and extension types in new interop
 /// 
-generate(String file, JsigenConfig config) {
+generate(String file, Config config) {
   
 }
