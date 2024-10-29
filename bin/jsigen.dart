@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 // TODO: Add support for deno apis
-import 'package:node_io/node_io.dart';
+import 'package:jsigen/src/base.dart';
+import 'package:node_io/node_io.dart'
+  if (dart.library.io) 'dart:io';
 
 import 'package:args/args.dart';
 
@@ -55,29 +57,4 @@ void main(List<String> args) async {
 
   // parse file
   
-}
-
-// TODO: Implement function
-runJsigen(Map<String, dynamic> config, Directory cwd) async {
-  // get input file
-
-  // parse input file
-  await parseJsFile();
-
-  // convert to output file
-  await transformJsExports();
-
-  // write output file
-  await writeOutput();
-}
-
-runReverseJsigen(Map<String, dynamic> config, Directory cwd) async {
-  // parse input file
-  await parseDartFile();
-
-  // convert to output file
-  await transformDartExports();
-
-  // write output file
-  await writeOutput();
 }
