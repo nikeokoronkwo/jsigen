@@ -8,7 +8,7 @@ import 'package:jsigen/src/api/options.dart';
 /// 
 /// The configuration object is used for JavaScript files and JavaScript Libraries
 @JSExport()
-sealed class Config {
+class Config {
   /// The name of the config
   String? name;
 

@@ -1,14 +1,40 @@
 library jsigen.api;
 
-import 'package:jsigen/src/api/config.dart';
+import 'dart:js_interop';
+
+import 'config.dart';
+import '../parser/parser.dart' as js;
+
+@JS('Config')
+extension type JSConfig._(JSObject o) implements JSObject {
+
+}
 
 /// Parses a js file and generates the JS API AST from it needed for the given project
 /// 
 /// If a declaration has an object type, this object type is added in a [Set] and is generated as an anonymous object 
 /// 
 /// If a declaration has a function type, this object type is added in a [Set] and used as either a class or typealias
-parse(String file, Config config) {
+int parse(String file, Config config) {
+  // TODO: Implement parsing
 
+  final p = js.parseFile(file);
+
+  // return p;
+  return 1;
+}
+
+/// Parses a javascript module
+int parseModule(String directory, Config config) {
+  // TODO: Implement parsing
+
+  // Resolve module
+  final src = '';
+
+  final p = js.parse(src);
+
+  // return p;
+  return 1;
 }
 
 
@@ -32,6 +58,18 @@ parse(String file, Config config) {
 /// ## Classes
 /// Classes are converted into classes in old interop and extension types in new interop
 /// 
-generate(String file, Config config) {
-  
+Object generate(String file, Config config) {
+  final parsedResult = parse(file, config);
+  return transform(config: config);
+}
+
+
+/// Same as [generate], but used for generating bindings for modules
+Object generateModule(String directory, Config config) {
+  final parsedResult = parseModule(directory, config);
+  return transform(config: config);
+}
+
+transform({required Config config}) {
+
 }

@@ -22,15 +22,15 @@ extension type JSParseResult._(JSObject o) implements JSObject {
   external JSParseResult({
     JSRecord exports,
   });
-  external set exports(JSRecord value);
+  external JSRecord<JSString, JSObject> get exports;
 }
 
 /// Gets the content of the entry JavaScript File from 
 @JS('parse')
-external void parse(String source, [JSParseOptions? options]);
+external JSParseResult parse(String source, [JSParseOptions? options]);
 
 @JS('parseFile')
-external void parseFile(String filename, [JSParseOptions? options]);
+external JSParseResult parseFile(String filename, [JSParseOptions? options]);
 
 // runReverseJsigen(Map<String, dynamic> config, Directory cwd) async {
 //   // parse input file
