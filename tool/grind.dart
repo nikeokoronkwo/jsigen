@@ -39,7 +39,7 @@ void js_test() {
 @Task('Build the dev package')
 @Depends("pkg-npm-dev", copyJs, runpnpm)
 void dev() {
-  run('pnpm', arguments: ['dev'], workingDirectory: npmDir.path);
+  // run('pnpm', arguments: ['dev'], workingDirectory: npmDir.path);
 }
 
 @Task('Build the release package')

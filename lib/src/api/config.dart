@@ -1,10 +1,13 @@
 /// TODO: Require
 /// TODO: Dynamic Imports
+import 'dart:js_interop';
+
 import 'package:jsigen/src/api/options.dart';
 
 /// The JSIGen Configuration Object
 /// 
 /// The configuration object is used for JavaScript files and JavaScript Libraries
+@JSExport()
 sealed class Config {
   /// The name of the config
   String? name;
@@ -43,16 +46,35 @@ sealed class Config {
   TransformerOptions? transformerOptions;
 
   /// Files to exclude from 
-  List<String> exclude;
+  List<String>? exclude;
 
   /// Whether typescript is used in this project
   bool typescript;
 
   /// Whether JSX is used in this project
   bool jsx;
+
+  /// Typescript options
+  TypeScriptOptions? typeScriptOptions;
+
+  Config({
+    this.name,
+    this.description,
+    this.preamble,
+    this.path = "",
+    this.output,
+    this.interopApi,
+    this.parserOptions,
+    this.transformerOptions,
+    this.exclude = const [],
+    this.typescript = false,
+    this.jsx = false,
+    this.typeScriptOptions,
+    this.module = false
+  });
 }
 
-
+@JSExport()
 final class ModuleConfig extends Config {
   @override
   bool module = true;
@@ -63,6 +85,7 @@ final class ModuleConfig extends Config {
   bool? outputAsDir;
 }
 
+@JSExport()
 final class FileConfig extends Config {
   @override
   bool module = false;

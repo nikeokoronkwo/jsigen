@@ -34,6 +34,14 @@ class TransformerOptions {
   /// 
   /// Defaults to `false` leaving them as function calls
   bool? constructorFunctions;
+
+  TransformerOptions({
+    this.defaultParameters,
+    this.weakAnonymousObjects,
+    this.weakAnonymousFunctions,
+    this.onlyGetters = const [],
+    this.constructorFunctions,
+  });
 }
 
 class TypeScriptOptions {

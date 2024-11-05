@@ -8,20 +8,11 @@ import parser from '@babel/parser';
 import traverse from '@babel/traverse';
 import { Declaration, Identifier, TSTypeAnnotation } from "@babel/types";
 import { FunctionNode, ParameterNode } from "./nodes";
+import { ParseOptions, defaultParseOptions } from "./types/ParseOptions";
 
-interface ParseOptions {
-  /** Whether typescript is allowed */
-  typescript?: boolean;
-  jsx?: boolean;
-  filename?: string;
-  flow?: boolean;
+interface ParseResult {
+  exports: Record<string, object>;
 }
-
-const defaultParseOptions = {}
-
-// class ParserResult {
-//   items: object[]
-// }
 
 /**
  * 
@@ -29,45 +20,10 @@ const defaultParseOptions = {}
  * @param {string} exportType 
  */
 function handleDeclaration(declaration: Declaration, exportType: string) {
-  let exportInfo = {
-    type: exportType,
-    name: declaration.id ? declaration.id.name : 'default',
-    kind: 'unknown',
-  };
-
-  let exp = [];
-
-  console.log(declaration);
 
   switch (declaration.type) {
     case "FunctionDeclaration":
-      exp.push({
-        type: "function",
-        name: declaration.id?.name ?? declaration.id?.loc?.identifierName,
-        parameters: declaration.params.map((p) => {
-          // debug
-          console.log(`========PARAMETER=======\n`)
-          console.log(p)
-          console.log(`\n=====================`)
-          // debug end
-
-          switch (p.type) {
-            case "Identifier":
-            case "AssignmentPattern":
-            case "ArrayPattern":
-            case "ObjectPattern":
-            case "RestElement":
-          }
-        })
-      });
-      break;
     case "VariableDeclaration":
-      exp.push({
-        // TODO: Remove the 'd' when done
-        d: declaration.declarations.map(d => {
-          console.log(d)
-        })
-      })
     case "ClassDeclaration":
     case "ExportAllDeclaration":
     case "ExportDefaultDeclaration":
@@ -97,62 +53,18 @@ function handleDeclaration(declaration: Declaration, exportType: string) {
 
 /**
  * Parses the given JavaScript/TypeScript source code and returns AST information concerning the public APIs used
- * @module Parser
- * @param {string} source
- * @param {ParseOptions} [options]  
  */
-export function parse(source: string, options: ParseOptions = defaultParseOptions) {
-    /** plugins to pass to babel for parsing js code @type {parser.ParserPlugin[]} */
-    const plugins: parser.ParserPlugin[] = ['classProperties'];
-    if (options.typescript) plugins.push('typescript');
-    if (options.jsx) plugins.push('jsx', 'flow');
+export function parse(source: string, options: ParseOptions = defaultParseOptions): ParseResult {
+    // parse source code
+    
+    // get exports
 
-    const ast = parser.parse(source, {
-        sourceType: 'module',
-        plugins,
-        sourceFilename: options.filename,
-    });
+    // generate exports
 
-    const exports = [];
-
-    // Traverse the AST to find export declarations
-    traverse(ast, {
-      ExportNamedDeclaration(path) {
-        if (path.node.declaration) {
-          const { declaration } = path.node;
-          handleDeclaration(declaration, 'NamedExport');
-          if (declaration.id) {
-            exports.push({
-              type: 'NamedExport',
-              name: declaration.id.name,
-              kind: declaration.kind, // "const", "let", "var", "function", etc.
-            });
-          } else if (declaration.declarations) {
-            declaration.declarations.forEach((decl) => {
-              exports.push({
-                type: 'NamedExport',
-                name: decl.id.name,
-                kind: declaration.kind,
-              });
-            });
-          }
-        }
-      },
-      ExportDefaultDeclaration(path) {
-        exports.push({
-          type: 'DefaultExport',
-          name: path.node.declaration.name || 'default',
-        });
-      },
-      ExportAllDeclaration(path) {
-        exports.push({
-          type: 'ReExport',
-          source: path.node.source.value,
-        });
-      },
-    });
-
-    return exports;
+    // return export objects
+    return {
+      exports: {}
+    }
 }
 
 /**
@@ -161,7 +73,7 @@ export function parse(source: string, options: ParseOptions = defaultParseOption
  * @param {string} filename
  * @param {ParseOptions} options
  */
-function parseFile(filename: string, options: ParseOptions) {
+export function parseFile(filename: string, options: ParseOptions) {
     const source = fs.readFileSync(filename, 'utf8');
     options = {...options, ...{
         filename,
@@ -171,5 +83,3 @@ function parseFile(filename: string, options: ParseOptions) {
     return parse(source, options);
 }
 
-exports.parse = parse;
-exports.parseFile = parseFile;

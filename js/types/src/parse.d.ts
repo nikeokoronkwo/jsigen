@@ -1,18 +1,19 @@
 /**
  * @module Parser
  */
-interface ParseOptions {
-    /** Whether typescript is allowed */
-    typescript?: boolean;
-    jsx?: boolean;
-    filename?: string;
-    flow?: boolean;
+import { ParseOptions } from "./types/ParseOptions";
+interface ParseResult {
+    exports: Record<string, object>;
 }
 /**
  * Parses the given JavaScript/TypeScript source code and returns AST information concerning the public APIs used
- * @module Parser
- * @param {string} source
- * @param {ParseOptions} [options]
  */
-export declare function parse(source: string, options?: ParseOptions): any[];
+export declare function parse(source: string, options?: ParseOptions): ParseResult;
+/**
+ * Parses the file at the given path and returns AST information concerning the public APIs used
+ * @module Parser
+ * @param {string} filename
+ * @param {ParseOptions} options
+ */
+export declare function parseFile(filename: string, options: ParseOptions): ParseResult;
 export {};

@@ -1,5 +1,7 @@
 import "dart:js_interop";
 
+import "package:jsigen/src/api/config.dart";
+
 @JS()
 @staticInterop
 class _Exports {
@@ -8,7 +10,7 @@ class _Exports {
 
 @JS()
 extension _JS on _Exports {
-  external set sayHello(JSFunction function); 
+  external set sayHello(JSFunction function);
 }
 
 @JS()
