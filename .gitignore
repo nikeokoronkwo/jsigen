@@ -23,3 +23,5 @@ jsigen/*.info.json      # Produced by the --dump-info flag.
 *.js_
 *.js.deps
 *.js.map
+
+private
