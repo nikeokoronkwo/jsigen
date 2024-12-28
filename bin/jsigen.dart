@@ -30,18 +30,14 @@ void main(List<String> args) async {
     return;
   }
 
-  print('1');
-
   String? arg = result.rest.isNotEmpty ? result.rest[0] : null;
 
   // parse config file
   Directory cwd = Directory(arg ?? '.');
 
-  print('1');
-
-
   File configFile = File(p.join(cwd.absolute.path, result['config'] ?? 'jsigen.yaml'));
   String configAsString;
+  print('A');
   if (await configFile.exists()) {
     configAsString = await configFile.readAsString();
   } else {
@@ -49,7 +45,8 @@ void main(List<String> args) async {
     final pub = loadYaml(pubspec)['jsigen'].toString();
 
     if (pub == 'null' || pub == '') {
-      throw Exception('No config file/definition found');
+      print("Error: Could Not Find Configuration File");
+      exit(1);
     } else {
       configAsString = pub;
     }
