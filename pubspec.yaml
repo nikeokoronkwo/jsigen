@@ -22,7 +22,12 @@ dependencies:
   # path: ^1.8.0
 
 dev_dependencies:
+  analyzer: ^6.5.0
+  build: ^2.4.1
+  build_runner: ^2.4.11
   cli_pkg: ^2.10.0
+  dart_style: ^2.3.7
   grinder: ^0.9.5
   lints: ^3.0.0
+  source_gen: ^1.5.0
   test: ^1.24.0

@@ -1,13 +1,17 @@
 /// TODO: Require
 /// TODO: Dynamic Imports
-import 'dart:js_interop';
 
+import 'package:jsigen/src/annotations/index.dart';
 import 'package:jsigen/src/api/options.dart';
+
+import 'dart:js_interop' as _i1;
+
+part 'config.g.dart';
 
 /// The JSIGen Configuration Object
 /// 
 /// The configuration object is used for JavaScript files and JavaScript Libraries
-@JSExport()
+@JSMirror()
 class Config {
   /// The name of the config
   String? name;
@@ -72,9 +76,24 @@ class Config {
     this.typeScriptOptions,
     this.module = false
   });
+
+  Config.fromJS(JSConfig config): 
+    name = config.name,
+    description = config.description,
+    preamble = config.preamble,
+    path = config.path,
+    output = config.output,
+    interopApi = JSInteropAPI.parse(config.interopApi ?? JSInteropAPI.extensionType.name),
+    parserOptions = ParserOptions.fromJS(config.parserOptions),
+    transformerOptions = TransformerOptions.fromJS(config.transformerOptions),
+    exclude = config.exclude.toDart.map((m) => m.toDart).toList(),
+    typescript = config.typescript,
+    jsx = config.jsx,
+    typeScriptOptions = TypeScriptOptions.fromJS(config.typeScriptOptions),
+    module = config.module;
 }
 
-@JSExport()
+@JSMirror()
 final class ModuleConfig extends Config {
   @override
   bool module = true;
@@ -85,7 +104,7 @@ final class ModuleConfig extends Config {
   bool? outputAsDir;
 }
 
-@JSExport()
+@JSMirror()
 final class FileConfig extends Config {
   @override
   bool module = false;

@@ -17,7 +17,10 @@ main(args) {
           as Map<String, dynamic>;
   pkg.jsForceStrictMode.value = true;
   pkg.jsEsmExports.value = {
-    'sayHello'
+    'parse',
+    'generate',
+    'parseModule',
+    'generateModule'
   };
   pkg.jsRequires.value = [
     pkg.JSRequire('./src/parse.js', target: pkg.JSRequireTarget.all, identifier: 'parser')

@@ -1,4 +1,5 @@
 import 'package:jsigen/src/api/config.dart';
+import 'package:jsigen/src/api/result.dart';
 import 'package:jsigen/src/js/record.dart';
 import 'package:jsigen/src/parser/parser.dart';
 import 'package:node_io/node_io.dart';
@@ -13,12 +14,14 @@ generateDartWrapper(Directory cwd, {required Config config}) async {
 }
 
 /// Generates the dart bindings from the JS bindings
-generateDartBindings(JSParseResult jsExports, {required Config config}) {
-  // Implement
+generateDartBindings(ParseResult jsExports, {required Config config}) {
+  // TODO: Implement
 }
 
-Future<JSParseResult> parseJsFile(Directory cwd, {required Config config}) async {
-  return parseFile(
+Future<ParseResult> parseJsFile(Directory cwd, {required Config config}) async {
+  final res = parseFile(
     isAbsolute(config.path) ? config.path : join(cwd.path, config.path)
   );
+  // TODO: Convert JS Parse Result to Res
+  return ParseResult();
 }

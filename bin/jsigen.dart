@@ -30,10 +30,15 @@ void main(List<String> args) async {
     return;
   }
 
+  print('1');
+
   String? arg = result.rest.isNotEmpty ? result.rest[0] : null;
 
   // parse config file
   Directory cwd = Directory(arg ?? '.');
+
+  print('1');
+
 
   File configFile = File(p.join(cwd.absolute.path, result['config'] ?? 'jsigen.yaml'));
   String configAsString;
@@ -50,10 +55,16 @@ void main(List<String> args) async {
     }
   }
 
+  print('1');
+
+
   Map<String, dynamic> config = loadYaml(configAsString);
 
   // run jsigen
   await runJsigen(config, cwd);
+
+  print('1');
+
 
   // parse file
   

@@ -1,0 +1,16 @@
+targets:
+  $default:
+    builders:
+      jsigen:js_generator:
+        options:
+          preamble: |
+                // DO NOT EDIT
+
+
+builders:
+  js_generator:
+    import: "package:jsigen/builder/index.dart"
+    builder_factories: ['jsBuilder']
+    build_extensions: {".dart": [".g.dart"]}
+    auto_apply: dependents
+    build_to: source

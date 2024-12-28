@@ -1,7 +1,6 @@
 import "dart:js_interop";
 
 import "package:jsigen/src/api/api.dart";
-import "package:jsigen/src/api/config.dart";
 
 @JS()
 @staticInterop
